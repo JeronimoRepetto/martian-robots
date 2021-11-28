@@ -14,6 +14,9 @@ class GpsController {
   List<RobotModel> robot = [];
   String logs = "";
   VoidCallback cleanRobotSelection;
+
+  //Map Method
+
   createRandomSizeMap() {
     if (appModel.coordinateMapX == null) {
       Random rng = new Random();
@@ -26,6 +29,7 @@ class GpsController {
     }
   }
 
+  //Robot Methods
   createRandomRobot() {
     if (appModel.robots == null) {
       Random rng = new Random();
@@ -40,6 +44,7 @@ class GpsController {
     }
   }
 
+  //Actions Methods
   executeOrder(String inputSelected, robotId) {
     var inputs = inputSelected.characters;
     RobotModel finalRobot =
@@ -55,6 +60,7 @@ class GpsController {
     logs = _createLogs(finalRobot, inputSelected);
   }
 
+  //Here I check if the coordinates of the robot selected is out of map
   bool _checkLine(RobotModel finalRobot) {
     if (finalRobot.coordinateX < 1 ||
         finalRobot.coordinateX > mapX ||
@@ -154,6 +160,7 @@ class GpsController {
     return principalText + secondaryText;
   }
 
+  //Here i change the orientation of robot selected
   _changeCardinalPoints(action, finalRobot) {
     switch (finalRobot.cardinalPoints) {
       case CardinalPoints.NORTH:
@@ -189,6 +196,8 @@ class GpsController {
     }
   }
 
+  //Here i check if other robot cross here and if it disappeared or not
+  //If it disappeared, the selected robot doesn't go forward
   bool _checkDeadLine(RobotModel finalRobot) {
     int error = 0;
     if (appModel.lastConnections.isNotEmpty) {

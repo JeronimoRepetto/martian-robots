@@ -76,17 +76,11 @@ class _GpsScreenState extends State<GpsScreen> {
             child: Container(
                 decoration: BoxDecoration(color: Colors.black),
                 child: Center(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width - 19,
-                    height: (MediaQuery.of(context).size.height / 2) - 19,
-                    child: Center(
-                        child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: _mapCreator(),
-                    )),
-                  ),
-                )),
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: _mapCreator(),
+                ))),
           ),
           Expanded(
             flex: 1,
@@ -100,7 +94,7 @@ class _GpsScreenState extends State<GpsScreen> {
                           color: Colors.blueGrey,
                           width: MediaQuery.of(context).size.width / 3,
                           child: Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.all(5.0),
                             child: Text(
                               'Explore-LOG',
                               style: TextStyle(
@@ -140,7 +134,8 @@ class _GpsScreenState extends State<GpsScreen> {
                                 children: [
                                   Container(
                                     color: Colors.grey[300],
-                                    width: MediaQuery.of(context).size.width / 3,
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
                                     child: Padding(
                                       padding: const EdgeInsets.all(10.0),
                                       child: Text(
@@ -154,7 +149,8 @@ class _GpsScreenState extends State<GpsScreen> {
                                   ),
                                   Container(
                                     color: Colors.grey[300],
-                                    width: MediaQuery.of(context).size.width / 3,
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
                                     height: 50.0,
                                   ),
                                 ],
@@ -166,49 +162,42 @@ class _GpsScreenState extends State<GpsScreen> {
                     ),
                     Expanded(
                       child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 20.0),
+                        padding: const EdgeInsets.symmetric(vertical: 5.0),
                         color: Colors.blueGrey,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Center(
+                                child: ActionButton(
+                              input: checkInput(Inputs.FORWARD),
+                              function: _chargeInput,
+                              activate: _idRobotSelected != null,
+                            )),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 30.0),
                                   child: ActionButton(
-                                input: checkInput(Inputs.FORWARD),
-                                function: _chargeInput,
-                                activate: _idRobotSelected != null,
-                              )),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 30.0),
-                                      child: ActionButton(
-                                        input: checkInput(Inputs.LEFT),
-                                        function: _chargeInput,
-                                        activate: _idRobotSelected != null,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 30.0),
-                                      child: ActionButton(
-                                        input: checkInput(Inputs.RIGHT),
-                                        function: _chargeInput,
-                                        activate: _idRobotSelected != null,
-                                      ),
-                                    ),
-                                  ],
+                                    input: checkInput(Inputs.LEFT),
+                                    function: _chargeInput,
+                                    activate: _idRobotSelected != null,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 30.0),
+                                  child: ActionButton(
+                                    input: checkInput(Inputs.RIGHT),
+                                    function: _chargeInput,
+                                    activate: _idRobotSelected != null,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     )
@@ -321,11 +310,15 @@ class _GpsScreenState extends State<GpsScreen> {
     });
     finalList.add(Expanded(
       child: Container(
-        child: Text("Map Format : (" +
-            _gpsController.mapX.toString() +
-            "," +
-            _gpsController.mapY.toString() +
-            ")",textAlign: TextAlign.end,style: TextStyle(color: Colors.white,fontSize: 18),),
+        child: Text(
+          "Map Format : (" +
+              _gpsController.mapX.toString() +
+              "," +
+              _gpsController.mapY.toString() +
+              ")",
+          textAlign: TextAlign.end,
+          style: TextStyle(color: Colors.white, fontSize: 18),
+        ),
       ),
     ));
     return finalList;
@@ -344,7 +337,7 @@ class _GpsScreenState extends State<GpsScreen> {
               Padding(
                 padding: const EdgeInsets.all(0.1),
                 child: InkWell(
-                  onTap: (){
+                  onTap: () {
                     setState(() {
                       _idRobotSelected = idRobot;
                     });
